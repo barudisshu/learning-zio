@@ -1,13 +1,11 @@
 package info.galudisu
 
-import zio._
 import zio.blocking.Blocking
+import zio.{IO, Ref, ZIO}
 
-object parallel_web_crawler {
-
+package object crawler {
   final case class CrawlState[+E](visited: Set[URL], errors: List[E]) {
-    def visitAll(urls: Set[URL]): CrawlState[E] = copy(visited = visited ++ urls)
-
+    def visitAll(urls: Set[URL]): CrawlState[E]  = copy(visited = visited ++ urls)
     def logError[E1 >: E](e: E1): CrawlState[E1] = copy(errors = e :: errors)
   }
 

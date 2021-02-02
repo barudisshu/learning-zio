@@ -1,4 +1,4 @@
-package info.galudisu
+package info.galudisu.crawler
 
 /**
   * A data structure representing a structured URL, with a smart constructor.

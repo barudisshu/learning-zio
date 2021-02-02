@@ -1,10 +1,8 @@
-package info.galudisu
+package info.galudisu.crawler
 
-import zio._
+import zio.{ExitCode, IO, URIO}
 
 object Main extends zio.App {
-
-  import parallel_web_crawler._
 
   val Home: URL          = URL.make("http://zio.dev").get
   val Index: URL         = URL.make("http://zio.dev/index.html").get
