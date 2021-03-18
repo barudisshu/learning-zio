@@ -1,8 +1,8 @@
-package info.galudisu.akzo
+package info.galudisu.netty
 
 import doobie.util.transactor.Transactor
-import info.galudisu.akzo.dao.JobDAOLive
-import info.galudisu.akzo.model._
+import info.galudisu.netty.dao.JobDAOLive
+import info.galudisu.netty.model._
 import zio._
 import zio.clock.Clock
 import zio.interop.catz._

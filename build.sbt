@@ -31,6 +31,30 @@ lazy val chap02 = project
     libraryDependencies ++= commonDependencies ++ akkaDependencies ++ doobieDependencies ++ monadDependencies
   )
   .dependsOn(common)
+lazy val chap03 = project
+  .in(file("chap03"))
+  .settings(
+    name := "chap03",
+    settings,
+    libraryDependencies ++= commonDependencies ++ akkaDependencies ++ monadDependencies
+  )
+  .dependsOn(common)
+lazy val chap04 = project
+  .in(file("chap04"))
+  .settings(
+    name := "chap04",
+    settings,
+    libraryDependencies ++= commonDependencies ++ nettyDependencies
+  )
+  .dependsOn(common)
+lazy val chap05 = project
+  .in(file("chap05"))
+  .settings(
+    name := "chap05",
+    settings,
+    libraryDependencies ++= commonDependencies
+  )
+  .dependsOn(common)
 
 lazy val settings = Seq(
   javacOptions := Seq(
@@ -86,10 +110,10 @@ lazy val dependencies = new {
   val akkaHttpV      = "10.2.3"
   val circeV         = "0.13.0"
   val akkaHttpCirceV = "1.35.3"
+  val nettyV = "4.1.59.Final"
   val zioActorV      = "0.0.9"
   val doobieV        = "0.9.0"
-  val log4jV           = "2.12.1"
-
+  val log4jV         = "2.12.1"
 
   val zioCore        = "dev.zio" %% "zio"              % zioV
   val zioStreams     = "dev.zio" %% "zio-streams"      % zioV
@@ -103,14 +127,20 @@ lazy val dependencies = new {
   val circeCore     = "io.circe"          %% "circe-generic"    % circeV
   val akkaHttpCirce = "de.heikoseeberger" %% "akka-http-circe"  % akkaHttpCirceV
 
+  val nettyTransport = "io.netty" % "netty-transport" % nettyV
+  val nettyEpoll = "io.netty" % "netty-transport-native-epoll" % nettyV classifier "linux-x86_64"
+  val nettyHttp = "io.netty" % "netty-codec-http" % nettyV
+  val nettyHttp2 = "io.netty" % "netty-codec-http2" % nettyV
+
+
   val doobieCore     = "org.tpolecat" %% "doobie-core"     % doobieV
   val doobiePostgres = "org.tpolecat" %% "doobie-postgres" % doobieV
 
-  val lemonlabs      = "io.lemonlabs"   %% "scala-uri"      % scalaUriV
+  val lemonlabs = "io.lemonlabs" %% "scala-uri" % scalaUriV
 
-  val log4j2Core = "org.apache.logging.log4j"   % "log4j-core"       % log4jV
-  val log4j2Api = "org.apache.logging.log4j"   % "log4j-api"        % log4jV
-  val log4j2Impl = "org.apache.logging.log4j"   % "log4j-slf4j-impl" % log4jV
+  val log4j2Core = "org.apache.logging.log4j" % "log4j-core"       % log4jV
+  val log4j2Api  = "org.apache.logging.log4j" % "log4j-api"        % log4jV
+  val log4j2Impl = "org.apache.logging.log4j" % "log4j-slf4j-impl" % log4jV
 }
 
 lazy val commonDependencies = Seq(
@@ -118,7 +148,6 @@ lazy val commonDependencies = Seq(
   dependencies.zioStreams,
   dependencies.zioActor,
   dependencies.lemonlabs,
-
   dependencies.log4j2Core,
   dependencies.log4j2Api,
   dependencies.log4j2Impl
@@ -131,6 +160,13 @@ lazy val akkaDependencies = Seq(
   dependencies.akkaStream,
   dependencies.circeCore,
   dependencies.akkaHttpCirce
+)
+
+lazy val nettyDependencies = Seq(
+  dependencies.nettyTransport,
+  dependencies.nettyEpoll,
+  dependencies.nettyHttp,
+  dependencies.nettyHttp2,
 )
 
 lazy val doobieDependencies = Seq(
