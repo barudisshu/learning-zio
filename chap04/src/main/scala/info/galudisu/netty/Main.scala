@@ -1,5 +1,5 @@
 package info.galudisu.netty
-import info.galudisu.netty.Channel.{Channel, eventLoop}
+import info.galudisu.netty.Channel.Channel
 import io.netty.channel.nio.NioEventLoopGroup
 import io.netty.channel.socket.nio.NioServerSocketChannel
 import io.netty.channel.{ReflectiveChannelFactory, Channel => JChannel}
@@ -35,7 +35,7 @@ object Main extends App {
       _              <- Channel.Unsafe.register(workerGroup.next(), channelPromise)
       _              <- Channel.Unsafe.bind(new InetSocketAddress(8080), channelPromise)
       _              <- loop()
-      _              <- eventLoop.map(_.shutdownGracefully())
+      _              <- Channel.eventLoop.map(_.shutdownGracefully())
     } yield ()
   }
 
