@@ -1,5 +1,5 @@
 package info.galudisu.netty
-import info.galudisu.netty.Channel.{Channel, eventLoop, localAddress}
+import info.galudisu.netty.Channel.{Channel, eventLoop}
 import io.netty.channel.nio.NioEventLoopGroup
 import io.netty.channel.socket.nio.NioServerSocketChannel
 import io.netty.channel.{ReflectiveChannelFactory, Channel => JChannel}
