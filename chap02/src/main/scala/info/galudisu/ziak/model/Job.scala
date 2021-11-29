@@ -1,4 +1,4 @@
-package info.galudisu.netty.model
+package info.galudisu.ziak.model
 
 case class Job(id: Long, name: String)
 

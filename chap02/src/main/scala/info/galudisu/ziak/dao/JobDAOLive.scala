@@ -1,8 +1,8 @@
-package info.galudisu.netty.dao
+package info.galudisu.ziak.dao
 
 import doobie.implicits._
-import info.galudisu.netty.model._
-import info.galudisu.netty.{Dependencies, IOTransactor}
+import info.galudisu.ziak.model._
+import info.galudisu.ziak.{Dependencies, IOTransactor}
 import zio.IO
 import zio.interop.catz._
 

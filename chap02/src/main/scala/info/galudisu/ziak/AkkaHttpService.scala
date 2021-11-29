@@ -1,11 +1,11 @@
-package info.galudisu.netty
+package info.galudisu.ziak
 
 import akka.http.scaladsl.model.{HttpResponse, StatusCodes}
 import akka.http.scaladsl.server.Directives._
 import akka.http.scaladsl.server.Route
 import de.heikoseeberger.akkahttpcirce.ErrorAccumulatingCirceSupport
-import info.galudisu.netty.Dependencies._
-import info.galudisu.netty.model._
+import info.galudisu.ziak.Dependencies._
+import info.galudisu.ziak.model._
 import io.circe.Json
 import io.circe.generic.auto._
 import zio.{IO, ULayer, URIO, ZIO}

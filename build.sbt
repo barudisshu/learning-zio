@@ -1,7 +1,7 @@
 name := "learning-zio"
-version in ThisBuild := "0.1.0"
-organization in ThisBuild := "info.galudisu"
-scalaVersion in ThisBuild := "2.13.6"
+version := "0.1.0"
+organization := "info.galudisu"
+scalaVersion := "2.13.6"
 
 lazy val root = project
   .in(file("."))
@@ -47,7 +47,7 @@ lazy val settings = Seq(
     "-J-XX:MaxRAMFraction=1",
     "-J-XshowSettings:vm"
   ),
-  scalacOptions in Compile in console := Seq(
+  scalacOptions := Seq(
     "-Ypartial-unification",
     "-language:higherKinds",
     "-language:existentials",
@@ -91,18 +91,18 @@ lazy val dependencies = new {
 
   val scalaUriV      = "3.6.0"
   val akkaV          = "2.6.17"
-  val akkaHttpV      = "10.2.6"
+  val akkaHttpV      = "10.2.7"
   val circeV         = "0.14.1"
   val akkaHttpCirceV = "1.38.2"
   val nettyV         = "4.1.70.Final"
   val zioActorV      = "0.0.9"
-  val doobieV        = "0.13.4"
+  val doobieV        = "1.0.0-RC1"
   val log4jV         = "2.14.1"
 
-  val zioCore        = "dev.zio" %% "zio"              % zioV
-  val zioStreams     = "dev.zio" %% "zio-streams"      % zioV
-  val zioActor       = "dev.zio" %% "zio-actors"       % zioActorV
-  val zioInteropCats = "dev.zio" %% "zio-interop-cats" % zioInteropCatsV
+  val zioCore        = "dev.zio"       %% "zio"                % zioV
+  val zioStreams     = "dev.zio"       %% "zio-streams"        % zioV
+  val zioActor       = "dev.zio"       %% "zio-actors"         % zioActorV
+  val zioInteropCats = "dev.zio"       %% "zio-interop-cats"   % zioInteropCatsV
 
   val akkaCore      = "com.typesafe.akka" %% "akka-actor-typed"         % akkaV
   val akkaSlf4j     = "com.typesafe.akka" %% "akka-slf4j"               % akkaV

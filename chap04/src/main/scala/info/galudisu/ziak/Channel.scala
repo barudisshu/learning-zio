@@ -1,4 +1,4 @@
-package info.galudisu.netty
+package info.galudisu.ziak
 
 import io.netty.buffer.ByteBufAllocator
 import io.netty.channel.{ChannelConfig, ChannelId, ChannelMetadata, ChannelOutboundBuffer, ChannelPipeline, ChannelPromise, EventLoop, Channel => JChannel}
@@ -172,7 +172,7 @@ object Channel {
           unsafeChannel <- channel.get.unsafe()
           res <- Task(f(unsafeChannel))
         } yield res
-          
+
         def beginRead(): Task[Unit] =
           getUnsafeChannelThenExec(_.beginRead())
         def bind(address: JSocketAddress, promise: ChannelPromise): Task[Unit] =

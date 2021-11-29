@@ -1,8 +1,8 @@
-package info.galudisu.netty
+package info.galudisu.ziak
 import akka.actor.typed.ActorSystem
 import akka.actor.typed.scaladsl.Behaviors
 import akka.http.scaladsl.Http
-import info.galudisu.netty.Dependencies.ExtServices
+import info.galudisu.ziak.Dependencies.ExtServices
 import zio.ULayer
 
 import scala.concurrent.ExecutionContextExecutor

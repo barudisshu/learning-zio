@@ -4,7 +4,7 @@ import akka.http.scaladsl.server.Route
 import doobie.util.transactor.Transactor.Aux
 import zio._
 
-package object netty {
+package object ziak {
   type IOTransactor = Aux[Task, Unit]
 
   implicit class ZioHttpRoute[R <: Has[_]](zioRoute: URIO[R, Route]) {
