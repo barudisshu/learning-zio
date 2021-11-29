@@ -1,7 +1,7 @@
 name := "learning-zio"
 version in ThisBuild := "0.1.0"
 organization in ThisBuild := "info.galudisu"
-scalaVersion in ThisBuild := "2.13.3"
+scalaVersion in ThisBuild := "2.13.6"
 
 lazy val root = project
   .in(file("."))
@@ -10,50 +10,34 @@ lazy val root = project
 
 lazy val common = project
   .in(file("common"))
-  .settings(
-    name := "common",
-    settings,
-    libraryDependencies ++= commonDependencies
-  )
+  .settings(name := "common", settings, libraryDependencies ++= commonDependencies)
+lazy val chap00 = project
+  .in(file("chap00"))
+  .settings(name := "chap00", settings, libraryDependencies ++= commonDependencies)
+  .dependsOn(common)
 lazy val chap01 = project
   .in(file("chap01"))
-  .settings(
-    name := "chap01",
-    settings,
-    libraryDependencies ++= commonDependencies
-  )
+  .settings(name := "chap01", settings, libraryDependencies ++= commonDependencies)
   .dependsOn(common)
 lazy val chap02 = project
   .in(file("chap02"))
-  .settings(
-    name := "chap02",
-    settings,
-    libraryDependencies ++= commonDependencies ++ akkaDependencies ++ doobieDependencies ++ monadDependencies
-  )
+  .settings(name := "chap02",
+            settings,
+            libraryDependencies ++= commonDependencies ++ akkaDependencies ++ doobieDependencies ++ monadDependencies)
   .dependsOn(common)
 lazy val chap03 = project
   .in(file("chap03"))
-  .settings(
-    name := "chap03",
-    settings,
-    libraryDependencies ++= commonDependencies ++ akkaDependencies ++ monadDependencies
-  )
+  .settings(name := "chap03",
+            settings,
+            libraryDependencies ++= commonDependencies ++ akkaDependencies ++ monadDependencies)
   .dependsOn(common)
 lazy val chap04 = project
   .in(file("chap04"))
-  .settings(
-    name := "chap04",
-    settings,
-    libraryDependencies ++= commonDependencies ++ nettyDependencies
-  )
+  .settings(name := "chap04", settings, libraryDependencies ++= commonDependencies ++ nettyDependencies)
   .dependsOn(common)
 lazy val chap05 = project
   .in(file("chap05"))
-  .settings(
-    name := "chap05",
-    settings,
-    libraryDependencies ++= commonDependencies
-  )
+  .settings(name := "chap05", settings, libraryDependencies ++= commonDependencies)
   .dependsOn(common)
 
 lazy val settings = Seq(
@@ -102,36 +86,36 @@ lazy val settings = Seq(
 )
 
 lazy val dependencies = new {
-  val zioV            = "1.0.3"
-  val zioInteropCatsV = "2.2.0.1"
+  val zioV            = "1.0.12"
+  val zioInteropCatsV = "3.2.9.0"
 
-  val scalaUriV      = "3.0.0"
-  val akkaV          = "2.6.12"
-  val akkaHttpV      = "10.2.3"
-  val circeV         = "0.13.0"
-  val akkaHttpCirceV = "1.35.3"
-  val nettyV = "4.1.59.Final"
+  val scalaUriV      = "3.6.0"
+  val akkaV          = "2.6.17"
+  val akkaHttpV      = "10.2.6"
+  val circeV         = "0.14.1"
+  val akkaHttpCirceV = "1.38.2"
+  val nettyV         = "4.1.70.Final"
   val zioActorV      = "0.0.9"
-  val doobieV        = "0.9.0"
-  val log4jV         = "2.12.1"
+  val doobieV        = "0.13.4"
+  val log4jV         = "2.14.1"
 
   val zioCore        = "dev.zio" %% "zio"              % zioV
   val zioStreams     = "dev.zio" %% "zio-streams"      % zioV
   val zioActor       = "dev.zio" %% "zio-actors"       % zioActorV
   val zioInteropCats = "dev.zio" %% "zio-interop-cats" % zioInteropCatsV
 
-  val akkaCore      = "com.typesafe.akka" %% "akka-actor-typed" % akkaV
-  val akkaSlf4j     = "com.typesafe.akka" %% "akka-slf4j"       % akkaV
-  val AkkaHttp      = "com.typesafe.akka" %% "akka-http"        % akkaHttpV
-  val akkaStream    = "com.typesafe.akka" %% "akka-stream"      % akkaV
-  val circeCore     = "io.circe"          %% "circe-generic"    % circeV
-  val akkaHttpCirce = "de.heikoseeberger" %% "akka-http-circe"  % akkaHttpCirceV
+  val akkaCore      = "com.typesafe.akka" %% "akka-actor-typed"         % akkaV
+  val akkaSlf4j     = "com.typesafe.akka" %% "akka-slf4j"               % akkaV
+  val AkkaHttp      = "com.typesafe.akka" %% "akka-http"                % akkaHttpV
+  val akkaTestKit   = "com.typesafe.akka" %% "akka-actor-testkit-typed" % akkaV
+  val akkaStream    = "com.typesafe.akka" %% "akka-stream"              % akkaV
+  val circeCore     = "io.circe"          %% "circe-generic"            % circeV
+  val akkaHttpCirce = "de.heikoseeberger" %% "akka-http-circe"          % akkaHttpCirceV
 
-  val nettyTransport = "io.netty" % "netty-transport" % nettyV
-  val nettyEpoll = "io.netty" % "netty-transport-native-epoll" % nettyV classifier "linux-x86_64"
-  val nettyHttp = "io.netty" % "netty-codec-http" % nettyV
-  val nettyHttp2 = "io.netty" % "netty-codec-http2" % nettyV
-
+  val nettyTransport = "io.netty" % "netty-transport"              % nettyV
+  val nettyEpoll     = "io.netty" % "netty-transport-native-epoll" % nettyV classifier "linux-x86_64"
+  val nettyHttp      = "io.netty" % "netty-codec-http"             % nettyV
+  val nettyHttp2     = "io.netty" % "netty-codec-http2"            % nettyV
 
   val doobieCore     = "org.tpolecat" %% "doobie-core"     % doobieV
   val doobiePostgres = "org.tpolecat" %% "doobie-postgres" % doobieV
@@ -155,6 +139,7 @@ lazy val commonDependencies = Seq(
 
 lazy val akkaDependencies = Seq(
   dependencies.akkaCore,
+  dependencies.akkaTestKit,
   dependencies.akkaSlf4j,
   dependencies.AkkaHttp,
   dependencies.akkaStream,
@@ -166,7 +151,7 @@ lazy val nettyDependencies = Seq(
   dependencies.nettyTransport,
   dependencies.nettyEpoll,
   dependencies.nettyHttp,
-  dependencies.nettyHttp2,
+  dependencies.nettyHttp2
 )
 
 lazy val doobieDependencies = Seq(
