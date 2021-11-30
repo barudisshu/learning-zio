@@ -1,7 +1,17 @@
-name := "learning-zio"
-version := "0.1.0"
-organization := "info.galudisu"
-scalaVersion := "2.13.6"
+ThisBuild / name := "learning-zio"
+ThisBuild / version := "0.1.0"
+ThisBuild / organization := "info.galudisu"
+ThisBuild / scalaVersion := "2.13.6"
+ThisBuild / homepage := Some(url("https://github.com/barudisshu/learning-zio"))
+ThisBuild / licenses := List("MIT" -> url("https://opensource.org/licenses/MIT"))
+ThisBuild / developers := List(
+  Developer(
+    "barudisshu",
+    "Galudisu",
+    "galudisu@gmail.com",
+    url("https://galudisu.info")
+  )
+)
 
 lazy val root = project
   .in(file("."))
@@ -49,7 +59,7 @@ lazy val settings = Seq(
     "-J-XX:MaxRAMFraction=1",
     "-J-XshowSettings:vm"
   ),
-  scalacOptions := Seq(
+  Compile / console / scalacOptions := Seq(
     "-Ypartial-unification",
     "-language:higherKinds",
     "-language:existentials",

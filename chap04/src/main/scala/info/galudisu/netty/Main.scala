@@ -31,10 +31,10 @@ object Main extends App {
     }
 
     for {
-      _              <- Channel.Unsafe.beginRead()
       channelPromise <- Channel.Unsafe.voidPromise()
       _              <- Channel.Unsafe.register(workerGroup.next(), channelPromise)
       _              <- Channel.Unsafe.bind(new InetSocketAddress(8080), channelPromise)
+        _              <- Channel.Unsafe.beginRead()
       _              <- loop()
       _              <- Channel.eventLoop.map(_.shutdownGracefully())
     } yield ()
