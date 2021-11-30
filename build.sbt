@@ -6,7 +6,7 @@ scalaVersion := "2.13.6"
 lazy val root = project
   .in(file("."))
   .settings(settings)
-  .aggregate(common, chap01, chap02)
+  .aggregate(common, chap00, chap01, chap02, chap03, chap04, chap05)
 
 lazy val common = project
   .in(file("common"))
@@ -33,7 +33,9 @@ lazy val chap03 = project
   .dependsOn(common)
 lazy val chap04 = project
   .in(file("chap04"))
-  .settings(name := "chap04", settings, libraryDependencies ++= commonDependencies ++ nettyDependencies)
+  .settings(name := "chap04",
+            settings,
+            libraryDependencies ++= commonDependencies ++ nettyDependencies ++ bouncycastleDependencies)
   .dependsOn(common)
 lazy val chap05 = project
   .in(file("chap05"))
@@ -97,13 +99,16 @@ lazy val dependencies = new {
   val nettyV         = "4.1.70.Final"
   val zioActorV      = "0.0.9"
   val doobieV        = "1.0.0-RC1"
+  val bouncycastleV  = "1.69"
   val log4jV         = "2.14.1"
 
-  val zioCore        = "dev.zio"       %% "zio"                % zioV
-  val zioStreams     = "dev.zio"       %% "zio-streams"        % zioV
-  val zioActor       = "dev.zio"       %% "zio-actors"         % zioActorV
-  val zioInteropCats = "dev.zio"       %% "zio-interop-cats"   % zioInteropCatsV
+  // Dev ZIO
+  val zioCore        = "dev.zio" %% "zio"              % zioV
+  val zioStreams     = "dev.zio" %% "zio-streams"      % zioV
+  val zioActor       = "dev.zio" %% "zio-actors"       % zioActorV
+  val zioInteropCats = "dev.zio" %% "zio-interop-cats" % zioInteropCatsV
 
+  // Akka
   val akkaCore      = "com.typesafe.akka" %% "akka-actor-typed"         % akkaV
   val akkaSlf4j     = "com.typesafe.akka" %% "akka-slf4j"               % akkaV
   val AkkaHttp      = "com.typesafe.akka" %% "akka-http"                % akkaHttpV
@@ -112,16 +117,23 @@ lazy val dependencies = new {
   val circeCore     = "io.circe"          %% "circe-generic"            % circeV
   val akkaHttpCirce = "de.heikoseeberger" %% "akka-http-circe"          % akkaHttpCirceV
 
+  // Netty
   val nettyTransport = "io.netty" % "netty-transport"              % nettyV
   val nettyEpoll     = "io.netty" % "netty-transport-native-epoll" % nettyV classifier "linux-x86_64"
   val nettyHttp      = "io.netty" % "netty-codec-http"             % nettyV
   val nettyHttp2     = "io.netty" % "netty-codec-http2"            % nettyV
 
+  // Doobie
   val doobieCore     = "org.tpolecat" %% "doobie-core"     % doobieV
   val doobiePostgres = "org.tpolecat" %% "doobie-postgres" % doobieV
 
+  // bouncy castle JSSE provider
+  val bouncycastlePkix = "org.bouncycastle" % "bcpkix-jdk15on" % bouncycastleV
+  val bouncycastleTls  = "org.bouncycastle" % "bctls-jdk15on"  % bouncycastleV
+
   val lemonlabs = "io.lemonlabs" %% "scala-uri" % scalaUriV
 
+  // Log4j2
   val log4j2Core = "org.apache.logging.log4j" % "log4j-core"       % log4jV
   val log4j2Api  = "org.apache.logging.log4j" % "log4j-api"        % log4jV
   val log4j2Impl = "org.apache.logging.log4j" % "log4j-slf4j-impl" % log4jV
@@ -157,6 +169,11 @@ lazy val nettyDependencies = Seq(
 lazy val doobieDependencies = Seq(
   dependencies.doobieCore,
   dependencies.doobiePostgres
+)
+
+lazy val bouncycastleDependencies = Seq(
+  dependencies.bouncycastlePkix,
+  dependencies.bouncycastleTls
 )
 
 lazy val monadDependencies = Seq(
