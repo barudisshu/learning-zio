@@ -22,7 +22,7 @@ object Dependencies {
           "org.postgresql.Driver",
           "jdbc:postgresql://localhost:5432/test",
           "postgres",
-          ""
+          "postgres"
         )
         new JobDAOLive(xa)
       }

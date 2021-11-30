@@ -1,4 +1,4 @@
-package info.galudisu.ziak
+package info.galudisu.netty
 
 import io.netty.buffer.ByteBufAllocator
 import io.netty.channel.{ChannelConfig, ChannelId, ChannelMetadata, ChannelOutboundBuffer, ChannelPipeline, ChannelPromise, EventLoop, Channel => JChannel}

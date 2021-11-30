@@ -1,5 +1,6 @@
-package info.galudisu.ziak
-import info.galudisu.ziak.Channel.Channel
+package info.galudisu.netty
+
+import Channel.Channel
 import io.netty.channel.nio.NioEventLoopGroup
 import io.netty.channel.socket.nio.NioServerSocketChannel
 import io.netty.channel.{ReflectiveChannelFactory, Channel => JChannel}
