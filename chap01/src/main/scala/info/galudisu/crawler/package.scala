@@ -44,7 +44,7 @@ package object crawler {
     * A function that extracts URLs from a given web page.
     */
   def extractURLs(root: URL, html: String): List[URL] = {
-    val pattern = "href=[\"\']([^\"\']+)[\"\']".r
+    val pattern = "href=[\"']([^\"']+)[\"']".r
     scala.util
       .Try({
         val matches = (for (m <- pattern.findAllMatchIn(html)) yield m.group(1)).toList
