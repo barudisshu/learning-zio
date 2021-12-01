@@ -20,10 +20,16 @@ lazy val root = project
 
 lazy val common = project
   .in(file("common"))
-  .settings(name := "common", settings, libraryDependencies ++= commonDependencies)
+  .settings(name := "common",
+            settings,
+            libraryDependencies ++= commonDependencies,
+            testFrameworks += new TestFramework("zio.test.sbt.ZTestFramework"))
 lazy val chap00 = project
   .in(file("chap00"))
-  .settings(name := "chap00", settings, libraryDependencies ++= commonDependencies)
+  .settings(name := "chap00",
+            settings,
+            libraryDependencies ++= commonDependencies,
+            testFrameworks += new TestFramework("zio.test.sbt.ZTestFramework"))
   .dependsOn(common)
 lazy val chap01 = project
   .in(file("chap01"))
@@ -118,6 +124,11 @@ lazy val dependencies = new {
   val zioActor       = "dev.zio" %% "zio-actors"       % zioActorV
   val zioInteropCats = "dev.zio" %% "zio-interop-cats" % zioInteropCatsV
 
+  // ZIO test
+  val zioTest         = "dev.zio" %% "zio-test"          % zioV % Test
+  val zioTestSbt      = "dev.zio" %% "zio-test-sbt"      % zioV % Test
+  val zioTestMagnolia = "dev.zio" %% "zio-test-magnolia" % zioV % Test
+
   // Akka
   val akkaCore      = "com.typesafe.akka" %% "akka-actor-typed"         % akkaV
   val akkaSlf4j     = "com.typesafe.akka" %% "akka-slf4j"               % akkaV
@@ -153,6 +164,9 @@ lazy val commonDependencies = Seq(
   dependencies.zioCore,
   dependencies.zioStreams,
   dependencies.zioActor,
+  dependencies.zioTest,
+  dependencies.zioTestSbt,
+  dependencies.zioTestMagnolia,
   dependencies.lemonlabs,
   dependencies.log4j2Core,
   dependencies.log4j2Api,
