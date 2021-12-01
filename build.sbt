@@ -15,7 +15,7 @@ ThisBuild / developers := List(
 
 lazy val root = project
   .in(file("."))
-  .settings(settings)
+  .settings(name := "learning-zio", settings)
   .aggregate(common, chap00, chap01, chap02, chap03, chap04, chap05)
 
 lazy val common = project
