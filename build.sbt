@@ -105,6 +105,7 @@ lazy val settings = Seq(
 
 lazy val dependencies = new {
   val zioV            = "1.0.12"
+  val zioLoggingV     = "0.5.14"
   val zioInteropCatsV = "3.2.9.0"
 
   val scalaUriV      = "3.6.0"
@@ -123,6 +124,10 @@ lazy val dependencies = new {
   val zioStreams     = "dev.zio" %% "zio-streams"      % zioV
   val zioActor       = "dev.zio" %% "zio-actors"       % zioActorV
   val zioInteropCats = "dev.zio" %% "zio-interop-cats" % zioInteropCatsV
+
+  // ZIO logging
+  val zioLogging      = "dev.zio" %% "zio-logging"       % zioLoggingV
+  val zioLoggingSlf4j = "dev.zio" %% "zio-logging-slf4j" % zioLoggingV
 
   // ZIO test
   val zioTest         = "dev.zio" %% "zio-test"          % zioV % Test
@@ -168,6 +173,8 @@ lazy val commonDependencies = Seq(
   dependencies.zioTestSbt,
   dependencies.zioTestMagnolia,
   dependencies.lemonlabs,
+  dependencies.zioLogging,
+  dependencies.zioLoggingSlf4j,
   dependencies.log4j2Core,
   dependencies.log4j2Api,
   dependencies.log4j2Impl

@@ -1,13 +1,14 @@
 package info.galudisu.schedulecompute
 
 import info.galudisu.schedulecompute.Fiber._
-import zio.test.{DefaultRunnableSpec, TestSuccess}
+import zio.test._
+import zio.test.environment._
 
 object FiberSpec extends DefaultRunnableSpec {
-  def spec =
+  def spec: ZSpec[TestEnvironment, Unit] =
     suite("FiberSpec")(testM("concurrent wake up routine") {
       for {
-        r <- concurrentWakeUpRoutine()
-      } yield assert(TestSuccess.Succeeded)
+        _ <- concurrentWakeUpRoutine()
+      } yield assertTrue(true)
     })
 }
