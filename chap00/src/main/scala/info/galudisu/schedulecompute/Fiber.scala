@@ -1,7 +1,7 @@
 package info.galudisu.schedulecompute
 
 import zio._
-import zio.clock.Clock
+import zio.clock._
 import zio.duration.durationInt
 
 object Fiber {

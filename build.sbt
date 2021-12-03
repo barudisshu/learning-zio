@@ -1,4 +1,3 @@
-ThisBuild / name := "learning-zio"
 ThisBuild / version := "0.1.0"
 ThisBuild / organization := "info.galudisu"
 ThisBuild / scalaVersion := "2.13.6"
