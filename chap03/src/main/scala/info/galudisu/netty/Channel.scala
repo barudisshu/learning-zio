@@ -1,16 +1,16 @@
 package info.galudisu.netty
 
 import io.netty.buffer.ByteBufAllocator
-import io.netty.channel.{ChannelConfig, ChannelId, ChannelMetadata, ChannelOutboundBuffer, ChannelPipeline, ChannelPromise, EventLoop, Channel => JChannel}
-import zio._
+import io.netty.channel.{ChannelConfig, ChannelId, ChannelMetadata, ChannelOutboundBuffer, ChannelPipeline, ChannelPromise, EventLoop, Channel as JChannel}
+import zio.*
 
-import java.lang.{Object => JObject}
-import java.net.{SocketAddress => JSocketAddress}
+import java.lang.Object as JObject
+import java.net.SocketAddress as JSocketAddress
 
 object Channel {
 
   type Channel = Has[Service]
-  type Unsafe = Has[Unsafe.Service]
+  type Unsafe  = Has[Unsafe.Service]
 
   trait Service {
     def alloc(): Task[ByteBufAllocator]
@@ -166,11 +166,11 @@ object Channel {
     def write(msg: JObject, promise: ChannelPromise): RIO[Unsafe, Unit] =
       getEnv(_.write(msg, promise))
 
-    def live: ZLayer[Channel, Nothing, Unsafe] = ZLayer.fromFunction { channel: Channel =>
+    def live: ZLayer[Channel, Nothing, Unsafe] = ZLayer.fromFunction { (channel: Channel) =>
       new Service {
         private def getUnsafeChannelThenExec[A](f: JChannel.Unsafe => A): Task[A] = for {
           unsafeChannel <- channel.get.unsafe()
-          res <- Task(f(unsafeChannel))
+          res           <- Task(f(unsafeChannel))
         } yield res
 
         def beginRead(): Task[Unit] =

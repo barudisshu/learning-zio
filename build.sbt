@@ -1,6 +1,6 @@
 ThisBuild / version := "0.1.0"
 ThisBuild / organization := "info.galudisu"
-ThisBuild / scalaVersion := "2.13.6"
+ThisBuild / scalaVersion := "3.1.1-RC1"
 ThisBuild / homepage := Some(url("https://github.com/barudisshu/learning-zio"))
 ThisBuild / licenses := List("MIT" -> url("https://opensource.org/licenses/MIT"))
 ThisBuild / developers := List(
@@ -14,8 +14,8 @@ ThisBuild / developers := List(
 
 lazy val root = project
   .in(file("."))
-  .settings(name := "learning-zio", settings)
-  .aggregate(common, chap00, chap01, chap02, chap03, chap04, chap05)
+  .settings(name := "learning-zio", settings, update / aggregate:= false)
+  .aggregate(common, chap00, chap01, chap02, chap03, chap04)
 
 lazy val common = project
   .in(file("common"))
@@ -38,23 +38,17 @@ lazy val chap02 = project
   .in(file("chap02"))
   .settings(name := "chap02",
             settings,
-            libraryDependencies ++= commonDependencies ++ akkaDependencies ++ doobieDependencies ++ monadDependencies)
+            libraryDependencies ++= commonDependencies ++ akkaDependencies ++ monadDependencies)
   .dependsOn(common)
 lazy val chap03 = project
   .in(file("chap03"))
   .settings(name := "chap03",
             settings,
-            libraryDependencies ++= commonDependencies ++ akkaDependencies ++ monadDependencies)
+            libraryDependencies ++= commonDependencies ++ nettyDependencies ++ bouncycastleDependencies)
   .dependsOn(common)
 lazy val chap04 = project
   .in(file("chap04"))
-  .settings(name := "chap04",
-            settings,
-            libraryDependencies ++= commonDependencies ++ nettyDependencies ++ bouncycastleDependencies)
-  .dependsOn(common)
-lazy val chap05 = project
-  .in(file("chap05"))
-  .settings(name := "chap05", settings, libraryDependencies ++= commonDependencies)
+  .settings(name := "chap04", settings, libraryDependencies ++= commonDependencies)
   .dependsOn(common)
 
 lazy val settings = Seq(
@@ -103,25 +97,21 @@ lazy val settings = Seq(
 )
 
 lazy val dependencies = new {
-  val zioV            = "1.0.12"
+  val zioV            = "1.0.13"
   val zioLoggingV     = "0.5.14"
   val zioInteropCatsV = "3.2.9.0"
 
-  val scalaUriV      = "3.6.0"
-  val akkaV          = "2.6.17"
-  val akkaHttpV      = "10.2.7"
-  val circeV         = "0.14.1"
-  val akkaHttpCirceV = "1.38.2"
-  val nettyV         = "4.1.70.Final"
-  val zioActorV      = "0.0.9"
-  val doobieV        = "1.0.0-RC1"
-  val bouncycastleV  = "1.69"
-  val log4jV         = "2.14.1"
+  val scalaUriV     = "4.0.0-M3"
+  val akkaV         = "2.6.18"
+  val circeV        = "0.14.1"
+  val nettyV        = "4.1.70.Final"
+  val doobieV       = "1.0.0-RC1"
+  val bouncycastleV = "1.70"
+  val log4jV        = "2.17.1"
 
   // Dev ZIO
   val zioCore        = "dev.zio" %% "zio"              % zioV
   val zioStreams     = "dev.zio" %% "zio-streams"      % zioV
-  val zioActor       = "dev.zio" %% "zio-actors"       % zioActorV
   val zioInteropCats = "dev.zio" %% "zio-interop-cats" % zioInteropCatsV
 
   // ZIO logging
@@ -134,13 +124,11 @@ lazy val dependencies = new {
   val zioTestMagnolia = "dev.zio" %% "zio-test-magnolia" % zioV % Test
 
   // Akka
-  val akkaCore      = "com.typesafe.akka" %% "akka-actor-typed"         % akkaV
-  val akkaSlf4j     = "com.typesafe.akka" %% "akka-slf4j"               % akkaV
-  val AkkaHttp      = "com.typesafe.akka" %% "akka-http"                % akkaHttpV
-  val akkaTestKit   = "com.typesafe.akka" %% "akka-actor-testkit-typed" % akkaV
-  val akkaStream    = "com.typesafe.akka" %% "akka-stream"              % akkaV
-  val circeCore     = "io.circe"          %% "circe-generic"            % circeV
-  val akkaHttpCirce = "de.heikoseeberger" %% "akka-http-circe"          % akkaHttpCirceV
+  val akkaCore    = "com.typesafe.akka" %% "akka-actor-typed"         % akkaV
+  val akkaSlf4j   = "com.typesafe.akka" %% "akka-slf4j"               % akkaV
+  val akkaTestKit = "com.typesafe.akka" %% "akka-actor-testkit-typed" % akkaV
+  val akkaStream  = "com.typesafe.akka" %% "akka-stream"              % akkaV
+  val circeCore   = "io.circe"          %% "circe-generic"            % circeV
 
   // Netty
   val nettyTransport = "io.netty" % "netty-transport"              % nettyV
@@ -167,7 +155,6 @@ lazy val dependencies = new {
 lazy val commonDependencies = Seq(
   dependencies.zioCore,
   dependencies.zioStreams,
-  dependencies.zioActor,
   dependencies.zioTest,
   dependencies.zioTestSbt,
   dependencies.zioTestMagnolia,
@@ -183,10 +170,8 @@ lazy val akkaDependencies = Seq(
   dependencies.akkaCore,
   dependencies.akkaTestKit,
   dependencies.akkaSlf4j,
-  dependencies.AkkaHttp,
   dependencies.akkaStream,
-  dependencies.circeCore,
-  dependencies.akkaHttpCirce
+  dependencies.circeCore
 )
 
 lazy val nettyDependencies = Seq(
