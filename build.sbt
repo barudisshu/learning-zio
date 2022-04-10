@@ -1,6 +1,6 @@
 ThisBuild / version := "0.1.0"
 ThisBuild / organization := "info.galudisu"
-ThisBuild / scalaVersion := "3.1.1-RC1"
+ThisBuild / scalaVersion := "3.1.2"
 ThisBuild / homepage := Some(url("https://github.com/barudisshu/learning-zio"))
 ThisBuild / licenses := List("MIT" -> url("https://opensource.org/licenses/MIT"))
 ThisBuild / developers := List(
@@ -99,10 +99,10 @@ lazy val settings = Seq(
 lazy val dependencies = new {
   val zioV            = "1.0.13"
   val zioLoggingV     = "0.5.14"
-  val zioInteropCatsV = "3.2.9.0"
+  val zioInteropCatsV = "3.2.9.1"
 
-  val scalaUriV     = "4.0.0-M3"
-  val akkaV         = "2.6.18"
+  val scalaUriV     = "4.0.1"
+  val akkaV         = "2.6.19"
   val circeV        = "0.14.1"
   val nettyV        = "4.1.70.Final"
   val doobieV       = "1.0.0-RC1"
