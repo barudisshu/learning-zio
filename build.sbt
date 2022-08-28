@@ -8,97 +8,40 @@ ThisBuild / developers := List(
     "barudisshu",
     "Galudisu",
     "galudisu@gmail.com",
-    url("https://galudisu.info")
+    url("https://galudisu.info"),
   )
 )
 
 lazy val root = project
   .in(file("."))
-  .settings(name := "learning-zio", settings, update / aggregate := false)
+  .settings(name := "learning-zio", update / aggregate := false)
   .aggregate(common, chap00, chap01, chap02, chap03, chap04)
-
 lazy val common = project
   .in(file("common"))
   .settings(name := "common",
-            settings,
             libraryDependencies ++= commonDependencies,
             testFrameworks += new TestFramework("zio.test.sbt.ZTestFramework"))
 lazy val chap00 = project
   .in(file("chap00"))
   .settings(name := "chap00",
-            settings,
             libraryDependencies ++= commonDependencies,
             testFrameworks += new TestFramework("zio.test.sbt.ZTestFramework"))
   .dependsOn(common)
-lazy val chap01 = project
-  .in(file("chap01"))
-  .settings(name := "chap01", settings, libraryDependencies ++= commonDependencies)
-  .dependsOn(common)
+lazy val chap01 =
+  project.in(file("chap01")).settings(name := "chap01", libraryDependencies ++= commonDependencies).dependsOn(common)
 lazy val chap02 = project
   .in(file("chap02"))
-  .settings(name := "chap02",
-            settings,
-            libraryDependencies ++= commonDependencies ++ akkaDependencies ++ monadDependencies)
+  .settings(name := "chap02", libraryDependencies ++= commonDependencies ++ akkaDependencies ++ monadDependencies)
   .dependsOn(common)
 lazy val chap03 = project
   .in(file("chap03"))
   .settings(name := "chap03",
-            settings,
             libraryDependencies ++= commonDependencies ++ nettyDependencies ++ bouncycastleDependencies)
   .dependsOn(common)
-lazy val chap04 = project
-  .in(file("chap04"))
-  .settings(name := "chap04", settings, libraryDependencies ++= commonDependencies)
-  .dependsOn(common)
-lazy val chap05 = project
-  .in(file("chap05"))
-  .settings(name := "chap05", settings, libraryDependencies ++= commonDependencies)
-  .dependsOn(common)
-
-lazy val settings = Seq(
-  javacOptions := Seq(
-    "-J-XX:+UnlockExperimentalVMOptions",
-    "-J-XX:+UseCGroupMemoryLimitForHeap",
-    "-J-XX:MaxRAMFraction=1",
-    "-J-XshowSettings:vm"
-  ),
-  Compile / console / scalacOptions := Seq(
-    "-Ypartial-unification",
-    "-language:higherKinds",
-    "-language:existentials",
-    "-Yno-adapted-args",
-    "-Xsource:2.13",
-    "-Yrepl-class-based",
-    "-deprecation",
-    "-encoding",
-    "UTF-8",
-    "-explaintypes",
-    "-Yrangepos",
-    "-feature",
-    "-Xfuture",
-    "-unchecked",
-    "-Xlint:_,-type-parameter-shadow",
-    "-Ywarn-numeric-widen",
-    "-Ywarn-value-discard",
-    "-opt-warnings",
-    "-Ywarn-extra-implicit",
-    "-Ywarn-unused:_,imports",
-    "-Ywarn-unused:imports",
-    "-opt:l:inline",
-    "-opt-inline-from:<source>",
-    "-Ypartial-unification",
-    "-Yno-adapted-args",
-    "-Ywarn-inaccessible",
-    "-Ywarn-infer-any",
-    "-Ywarn-nullary-override",
-    "-Ywarn-nullary-unit"
-  ),
-  resolvers ++= Seq(
-    "Local Maven Repository".at("file://" + Path.userHome.absolutePath + "/.m2/repository"),
-    Resolver.sonatypeRepo("releases"),
-    Resolver.sonatypeRepo("snapshots")
-  )
-)
+lazy val chap04 =
+  project.in(file("chap04")).settings(name := "chap04", libraryDependencies ++= commonDependencies).dependsOn(common)
+lazy val chap05 =
+  project.in(file("chap05")).settings(name := "chap05", libraryDependencies ++= commonDependencies).dependsOn(common)
 
 lazy val dependencies = new {
   val zioV            = "2.0.1"
@@ -167,7 +110,7 @@ lazy val commonDependencies = Seq(
   dependencies.zioLoggingSlf4j,
   dependencies.log4j2Core,
   dependencies.log4j2Api,
-  dependencies.log4j2Impl
+  dependencies.log4j2Impl,
 )
 
 lazy val akkaDependencies = Seq(
@@ -175,24 +118,24 @@ lazy val akkaDependencies = Seq(
   dependencies.akkaTestKit,
   dependencies.akkaSlf4j,
   dependencies.akkaStream,
-  dependencies.circeCore
+  dependencies.circeCore,
 )
 
 lazy val nettyDependencies = Seq(
   dependencies.nettyTransport,
   dependencies.nettyEpoll,
   dependencies.nettyHttp,
-  dependencies.nettyHttp2
+  dependencies.nettyHttp2,
 )
 
 lazy val doobieDependencies = Seq(
   dependencies.doobieCore,
-  dependencies.doobiePostgres
+  dependencies.doobiePostgres,
 )
 
 lazy val bouncycastleDependencies = Seq(
   dependencies.bouncycastlePkix,
-  dependencies.bouncycastleTls
+  dependencies.bouncycastleTls,
 )
 
 lazy val monadDependencies = Seq(
