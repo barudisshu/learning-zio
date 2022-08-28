@@ -5,7 +5,7 @@ import zio.Clock.*
 import zio.internal.stacktracer.Tracer
 import zio.test.*
 import zio.test.TestAspect.*
-import zio.{Clock, Scope, ZLayer, durationInt}
+import zio.{ Clock, Scope, ZLayer, durationInt }
 
 object FiberSpec extends ZIOSpecDefault:
 
@@ -29,4 +29,4 @@ object FiberSpec extends ZIOSpecDefault:
           _     <- fiber.join
         } yield assertCompletes
       },
-    ).provideLayer(ZLayer.succeed(Clock.ClockLive)) @@ sequential
+    ).provideLayer(ZLayer.succeed(Clock.ClockLive)) @@ sequential @@ withLiveClock
